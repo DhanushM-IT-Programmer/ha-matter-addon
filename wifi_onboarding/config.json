@@ -1,0 +1,59 @@
+{
+  "name": "WiFi Onboarding",
+  "version": "2.0.0",
+  "slug": "wifi_onboarding",
+  "description": "WiFi onboarding via NetworkManager hotspot and captive portal",
+  "arch": ["aarch64", "armhf", "armv7", "amd64", "i386"],
+  "startup": "before",
+  "boot": "auto",
+  "init": false,
+  "host_network": true,
+  "host_ipc": true,
+  "full_access": true,
+  "privileged": [
+    "NET_ADMIN",
+    "SYS_MODULE",
+    "SYS_RAWIO",
+    "SYS_ADMIN",
+    "NET_RAW"
+  ],
+  "devices": [
+    "/dev/gpiomem",
+    "/dev/gpiochip0",
+    "/dev/gpiochip1",
+    "/dev/gpiochip2",
+    "/dev/gpiochip3",
+    "/dev/gpiochip4",
+    "/dev/mem"
+  ],
+  "options": {
+    "debug": false,
+    "gpio_pin": 17,
+    "hold_time": 5,
+    "hotspot_ssid": "WiFi-Setup",
+    "hotspot_channel": 6,
+    "enable_button": true,
+    "connection_timeout": 60
+  },
+  "schema": {
+    "debug": "bool",
+    "gpio_pin": "int(1,40)",
+    "hold_time": "int(3,30)",
+    "hotspot_ssid": "str",
+    "hotspot_channel": "int(1,13)",
+    "enable_button": "bool",
+    "connection_timeout": "int(30,300)"
+  },
+  "host_dbus": true,
+  "hassio_api": true,
+  "hassio_role": "admin",
+  "ports": {
+    "80/tcp": 80
+  },
+  "ports_description": {
+    "80/tcp": "Web interface (captive portal)"
+  },
+  "panel_icon": "mdi:wifi-cog",
+  "panel_title": "WiFi Setup",
+  "timeout": 300
+}
